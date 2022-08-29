@@ -58,5 +58,4 @@ function addModalListeners() {
 
 function removeModalListeners() {
   document.removeEventListener('keydown', onEscKeydown);
-  instance.element().removeEventListener('click', onModalClick);
 }
