@@ -35,27 +35,22 @@ function openModal(evt) {
   const currentUrl = evt.target.dataset.source;
 
   instance = basicLightbox.create(
-    `<img src = "${currentUrl}" alt ="${evt.target.alt}" width="800" height="600" />`
+    `<img src = "${currentUrl}" alt ="${evt.target.alt}" width="800" height="600" />`,
+    {
+      onShow: instance => {
+        document.addEventListener('keydown', onEscKeydown);
+      },
+      onClose: instance => {
+        document.removeEventListener('keydown', onEscKeydown);
+      },
+    }
   );
-  instance.show(addModalListeners);
+  instance.show();
 }
 
 function onEscKeydown(evt) {
   if (evt.code !== 'Escape') {
     return;
   }
-  instance.close(removeModalListeners);
-}
-
-function onModalClick() {
-  instance.close(removeModalListeners);
-}
-
-function addModalListeners() {
-  document.addEventListener('keydown', onEscKeydown);
-  instance.element().addEventListener('click', onModalClick);
-}
-
-function removeModalListeners() {
-  document.removeEventListener('keydown', onEscKeydown);
+  instance.close();
 }
