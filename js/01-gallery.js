@@ -29,13 +29,15 @@ function createGalleryMarkup(arr) {
 function openModal(evt) {
   evt.preventDefault();
 
-  if (!evt.target.classList.contains('gallery__image')) {
+  const { classList, dataset, alt } = evt.target;
+
+  if (!classList.contains('gallery__image')) {
     return;
   }
-  const currentUrl = evt.target.dataset.source;
+  const currentUrl = dataset.source;
 
   instance = basicLightbox.create(
-    `<img src = "${currentUrl}" alt ="${evt.target.alt}" width="800" height="600" />`,
+    `<img src = "${currentUrl}" alt ="${alt}" width="800" height="600" />`,
     {
       onShow: instance => {
         document.addEventListener('keydown', onEscKeydown);
